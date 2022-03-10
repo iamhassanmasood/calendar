@@ -1,4 +1,61 @@
+body {
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.date-link {
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+  padding: 15px;
+}
+.date-hide-show {
+  float: right;
+  font-weight: normal;
+  text-align: center;
+  padding: 15px;
+  color: #1890ff;
+}
+.carousal-div {
+  width: 100%;
+  background-color: #fdfdfd;
+}
 
-body{
-    font-family: sans-serif;
+.month-wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px 5px 0px 0px;
+  background: #dd3c3c;
+}
+.card-wrapper {
+  width: 150px;
+  height: 160px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 10px 10px;
+}
+.month-heading {
+  color: #fff;
+  font-size: 16px;
+  margin: auto;
+}
+.date-heading {
+  color: gray;
+  font-size: 50px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 10px;
+}
+.days-heading {
+  color: gray;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 0px;
 }
