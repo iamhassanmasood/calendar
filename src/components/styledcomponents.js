@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const CardWrapper = styled.div`
+margin:auto;
 width: 150px;
 height: 160px;
 border: 1px solid gray;
@@ -9,11 +10,12 @@ border-radius:5px;
 export const MonthWrapper = styled.div`
 display:flex;
 justify-content:center;
+text-align:center;
 width: 100%;
 height: 40px;
 border: 1px solid #dd3c3c;
 border-radius:5px 5px 0px 0px;
-background-color:#dd3c3c;
+background:#dd3c3c;
 `
 export const MonthHeading =  styled.span`
 color:#fff;

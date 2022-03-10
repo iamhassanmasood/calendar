@@ -8,8 +8,7 @@ export default function DateCard({month, date, day}){
 
 
      return(     
-       <Fragment>
-        
+       <Fragment> 
          <CardWrapper>
           <MonthWrapper>
             <MonthHeading>

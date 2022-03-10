@@ -1,30 +1,46 @@
 import React, { useState, useEffect} from 'react';
+import moment from "moment"
 import DateCard from './DateCard'
-const { datesGenerator } = require('dates-generator');
-const presentDay = new Date();
-const year = presentDay.getFullYear();
-const month = presentDay.getMonth();
-
-const body = {
-  year,
-  month, // 0 - 11, 0 = Jan - 11 = Dec
-  startingDay:0, // starting day of the calendar, 0 = Sun - 6 = Sat, default is 0 if anything is not passed
-};
+import 'antd/dist/antd.css';
+import { Carousel } from 'antd';
 
 export default function App() {
-    const _months = ["January","February","March","April","May","June","July",
-    "August","September","October","November","December"];
-    const _days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
     const [records, setRecords] = useState([])
-    const { dates, previousYear, previousMonth, nextYear, nextMonth }  = datesGenerator(body);
+    const generateDates = () => {
+      const date = moment("2022-03-10");
+      const disabledDates = ["2022-03-10", "2022-03-11", "2022-03-12"];
+      const first =  moment(new Date());
+      const last = moment("2022-07-10");
+      const numberOfDays = last
+        ? moment.duration(last.diff(first)).asDays() + 1
+        : 60;
+      const dates = [];
+      for (let i = 0; i < numberOfDays; i += 1) {
+        const isDisabled = !!disabledDates.includes(date.format('YYYY-MM-DD'));
+        dates.push({
+          date: date.format('YYYY-MM-DD'),
+          day: date.format('D'),
+          day_of_week: date.format('dddd'),
+          month: date.format('MMMM'),
+          disabled: isDisabled,
+        });
+        date.add(1, 'days');
+      }
+      return setRecords(dates);
+    };
   
     useEffect(()=>{
-      let merged = [].concat.apply([], dates);
-      setRecords(merged)
+      const first = moment(new Date());
+      const selected = moment("2022-07-10");
+      const selectedDayIndex = moment.duration(selected.diff(first)).asDays();
+      console.log(selectedDayIndex, "selectedDayIndex")
+      generateDates()
     }, [])
+    
   return (
-      <>
-      {records.map((item, idx)=><DateCard month={_months[item.month]} date={item.date} day={"Wednesday"} key={idx}/>)}
-      </>
+      <Carousel autoplay>
+      {records.map((item, idx)=><DateCard month={item.month} date={item.day} day={item.day_of_week} key={idx}/>)}
+      </Carousel>
   )
 }
