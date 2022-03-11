@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import DateCard from "./DateCard";
 import "antd/dist/antd.css";
-import { Carousel, Row, Col, Divider } from "antd";
-import { Typography } from "antd";
+import { Carousel, Row, Col, Typography, TimePicker } from "antd";
 import {
   DownOutlined,
   UpOutlined,
@@ -11,10 +10,12 @@ import {
   MinusCircleOutlined,
 } from "@ant-design/icons";
 
-const { Link } = Typography;
+const { Paragraph } = Typography;
 
 export default function App(props) {
   const [records, setRecords] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("Today");
+  const [timeVal, setTimeVal] = useState("00:00");
   const [show, setShow] = useState(true);
   const generateDates = (props) => {
     const date = moment(props.firstDate);
@@ -34,7 +35,9 @@ export default function App(props) {
       const isDisabled = !!disabledDates.includes(date.format("YYYY-MM-DD"));
 
       dates.push({
-        date: date.format("YYYY-MM-DD"),
+        date: `${date.format("D")}. ${date.format("MMMM")} ${date.format(
+          "YYYY"
+        )}`,
         day: date.format("D"),
         day_of_week: date.format("dddd"),
         month: date.format("MMMM"),
@@ -46,10 +49,6 @@ export default function App(props) {
   };
 
   useEffect(() => {
-    const first = moment(new Date());
-    const selected = moment("2022-07-10");
-    const selectedDayIndex = moment.duration(selected.diff(first)).asDays();
-    console.log(selectedDayIndex, "selectedDayIndex");
     generateDates(props);
   }, []);
 
@@ -59,25 +58,33 @@ export default function App(props) {
     slidesToScroll: 1,
   };
 
+  function handleTimeChange(time) {
+    let _time = moment(time).format("HH:mm");
+    setTimeVal(_time);
+  }
+
   return (
     <Row>
       <Col span={12} offset={6}>
         <Row>
           <Col span={24}>
-            <Link className="date-link">Date</Link>
-            {show ? (
-              <DownOutlined
-                onClick={() => setShow((x) => !x)}
-                className="date-hide-show"
-                style={{ fontSize: "20px" }}
-              />
-            ) : (
-              <UpOutlined
-                onClick={() => setShow((x) => !x)}
-                className="date-hide-show"
-                style={{ fontSize: "20px" }}
-              />
-            )}
+            <Paragraph className="date-link">Date</Paragraph>
+            <Row className="date-hide-show">
+              <Paragraph style={{ paddingRight: "10px", fontSize: "16px" }}>
+                {selectedDate}
+              </Paragraph>
+              {show ? (
+                <DownOutlined
+                  onClick={() => setShow((x) => !x)}
+                  style={{ fontSize: "20px" }}
+                />
+              ) : (
+                <UpOutlined
+                  onClick={() => setShow((x) => !x)}
+                  style={{ fontSize: "20px" }}
+                />
+              )}
+            </Row>
           </Col>
         </Row>
         <>
@@ -90,8 +97,10 @@ export default function App(props) {
                       month={item.month}
                       date={item.day}
                       day={item.day_of_week}
+                      slected={item.date}
                       key={idx}
-                      selected={item.date}
+                      onChange={setSelectedDate}
+                      disabled={item.disabled}
                     />
                   ))}
                 </Carousel>
@@ -101,16 +110,21 @@ export default function App(props) {
             <>
               <Row>
                 <Col span={24}>
-                  <Link className="date-link">Time</Link>
-                  <DownOutlined
-                    className="date-hide-show"
-                    style={{ fontSize: "20px" }}
-                  />
+                  <Paragraph className="date-link">Time</Paragraph>
+                  <Row className="date-hide-show">
+                    <TimePicker
+                      style={{ border: "none" }}
+                      value={moment(timeVal, "HH:mm")}
+                      format={"HH:mm"}
+                      onChange={(time) => handleTimeChange(time)}
+                    />
+                    <DownOutlined style={{ fontSize: "20px" }} />
+                  </Row>
                 </Col>
               </Row>
               <Row>
                 <Col span={24}>
-                  <Link className="date-link">Duration</Link>
+                  <Paragraph className="date-link">Duration</Paragraph>
                   <PlusCircleOutlined
                     className="date-hide-show"
                     style={{ fontSize: "24px" }}
