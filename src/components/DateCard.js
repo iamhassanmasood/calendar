@@ -1,24 +1,29 @@
-import React, { useState } from "react";
-import {
-  CardWrapper,
-  MonthWrapper,
-  MonthHeading,
-  DateHeading,
-  DaysHeading,
-} from "./styledcomponents";
+import React from "react";
+import { Card, Typography } from "antd";
+const { Title, Paragraph } = Typography;
 
-export default function DateCard({ month, date, day, selected }) {
-  const [value, setValue] = useState("");
+import "antd/dist/antd.css";
 
+export default function DateCard({
+  month,
+  date,
+  day,
+  onChange,
+  disabled,
+  slected,
+}) {
   return (
-    <div className="container">
-      <div className="card-wrapper" onClick={() => setValue(selected)}>
-        <div className="month-wrapper">
-          <div className="month-heading">{month}</div>
-        </div>
-        <div className="date-heading">{date}</div>
-        <div className="days-heading">{day}</div>
-      </div>
-    </div>
+    <Card
+      title={month}
+      style={{ width: 170, height: 180, textAlign: "center" }}
+      onClick={!disabled ? () => onChange(slected) : () => {}}
+    >
+      <Title level={1} style={{ color: "gray", fontWeight: "normal" }}>
+        {date}
+      </Title>
+      <Paragraph style={{ color: "gray", fontSize: "20px", bottom: "0" }}>
+        {disabled ? "Closed" : day}
+      </Paragraph>
+    </Card>
   );
 }
