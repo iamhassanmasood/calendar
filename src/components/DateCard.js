@@ -17,7 +17,12 @@ export default function DateCard({
       <Col span={24}>
         <Card
           title={month}
-          style={{ width: 170, height: 180, textAlign: "center" }}
+          style={{
+            width: 170,
+            height: 180,
+            textAlign: "center",
+            cursor: disabled ? "no-drop" : "pointer",
+          }}
           onClick={!disabled ? () => onChange(slected) : () => {}}
         >
           <Title level={1} style={{ color: "gray", fontWeight: "normal" }}>
