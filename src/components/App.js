@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import DateCard from "./DateCard";
-import "antd/dist/antd.css";
+import "antd/dist/antd.less";
 import { Carousel, Row, Col, Typography, TimePicker } from "antd";
 import {
   DownOutlined,
@@ -97,6 +97,29 @@ export default function App(props) {
     speed: 100,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1360,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   function handleTimeChange(time) {

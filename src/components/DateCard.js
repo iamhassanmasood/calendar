@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Typography, Row, Col } from "antd";
 const { Title, Paragraph } = Typography;
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.less";
 
 export default function DateCard({
   month,
