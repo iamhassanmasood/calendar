@@ -54,6 +54,7 @@ export default function App(props) {
   const [durationHours, setDurationHours] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [show, setShow] = useState(true);
+
   const generateDates = (props) => {
     const date = moment(props.firstDate);
     const disabledDates = props.disabledDates ? props.disabledDates : [];
@@ -134,7 +135,7 @@ export default function App(props) {
     setDurationMinutes(Number(arr[1]));
   }
 
-  function onIncreaseTime() {
+  function onIncreaseDuration() {
     if (durationMinutes < 59 && durationMinutes >= 0) {
       setDurationMinutes((x) => x + 1);
     } else if (durationMinutes === 59) {
@@ -143,7 +144,7 @@ export default function App(props) {
     }
   }
 
-  function onDecreaseTime() {
+  function onDecreaseDuration() {
     if (durationMinutes > 0) {
       setDurationMinutes((x) => x - 1);
     }
@@ -225,7 +226,7 @@ export default function App(props) {
                     <Paragraph className="date-link">Duration</Paragraph>
                     <Row className="date-hide-show">
                       <PlusCircleOutlined
-                        onClick={onIncreaseTime}
+                        onClick={onIncreaseDuration}
                         style={{ fontSize: "24px" }}
                       />
                       <TimePicker
@@ -242,7 +243,7 @@ export default function App(props) {
                         bordered={false}
                       />
                       <MinusCircleOutlined
-                        onClick={onDecreaseTime}
+                        onClick={onDecreaseDuration}
                         style={{ fontSize: "24px" }}
                       />
                     </Row>
