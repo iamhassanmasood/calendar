@@ -1,51 +1,12 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import DateCard from "./DateCard";
 import "antd/dist/antd.less";
-import { Carousel, Row, Col, Typography, TimePicker } from "antd";
-import {
-  DownOutlined,
-  UpOutlined,
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
+import { Row, Col } from "antd";
 import PropTypes from "prop-types";
-
-const { Paragraph } = Typography;
-
-const SamplePrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <LeftOutlined
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        fontSize: "20px",
-        color: "black",
-      }}
-      onClick={onClick}
-    />
-  );
-};
-
-const SampleNextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <RightOutlined
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        fontSize: "20px",
-        color: "black",
-      }}
-      onClick={onClick}
-    />
-  );
-};
+import DateSelector from "./DateSelector";
+import TimeSelector from "./TimeSelector";
+import DurationSelector from "./DurationSelector";
+import CarouselCards from "./CarouselCards";
 
 function Calendar(props) {
   const [records, setRecords] = useState([]);
@@ -91,40 +52,6 @@ function Calendar(props) {
     generateDates(props);
   }, []);
 
-  const carouselSettings = {
-    autoplay: props.autoplay,
-    infinite: props.infinite,
-    pauseOnHover: props.pauseOnHover,
-    slidesToShow: props.slidesToShow,
-    slidesToScroll: props.slidesToScroll,
-    speed: props.speed,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1360,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 680,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   function handleTimeChange(time) {
     let _time = moment(time).format("HH:mm");
     setTimeValue(_time);
@@ -155,102 +82,35 @@ function Calendar(props) {
   return (
     <Row>
       <Col span={12} offset={6}>
-        <Row>
-          <Col span={24}>
-            <Paragraph className="date-link">Date</Paragraph>
-            <Row className="date-hide-show">
-              <Paragraph style={{ paddingRight: "10px", fontSize: "16px" }}>
-                {selectedDate}
-              </Paragraph>
-              {show ? (
-                <DownOutlined
-                  onClick={() => setShow((x) => !x)}
-                  style={{ fontSize: "20px" }}
-                />
-              ) : (
-                <UpOutlined
-                  onClick={() => setShow((x) => !x)}
-                  style={{ fontSize: "20px" }}
-                />
-              )}
-            </Row>
-          </Col>
-        </Row>
+        <DateSelector
+          show={show}
+          onShow={() => setShow((x) => !x)}
+          selectedDate={selectedDate}
+        />
         <>
           {show ? (
-            <Row>
-              <Col span={24} className="carousal-div">
-                <Carousel
-                  autoplay
-                  {...carouselSettings}
-                  swipeToSlide
-                  draggable
-                  arrows={true}
-                >
-                  {records.map((item, idx) => (
-                    <DateCard
-                      month={item.month}
-                      date={item.day}
-                      day={item.day_of_week}
-                      slected={item.date}
-                      key={idx}
-                      onChange={setSelectedDate}
-                      disabled={item.disabled}
-                    />
-                  ))}
-                </Carousel>
-              </Col>
-            </Row>
+            <CarouselCards
+              {...props}
+              records={records}
+              call={setSelectedDate}
+            />
           ) : (
             <>
-              <Row>
-                <Col span={24}>
-                  <Paragraph className="date-link">Time</Paragraph>
-                  <Row className="date-hide-show">
-                    <TimePicker
-                      style={{ width: "60px" }}
-                      defaultValue={moment(timeValue, "HH:mm")}
-                      value={moment(timeValue, "HH:mm")}
-                      format={"HH:mm"}
-                      onChange={(time) => handleTimeChange(time)}
-                      suffixIcon={null}
-                      clearIcon={null}
-                      bordered={false}
-                    />
-                    <DownOutlined style={{ fontSize: "20px" }} />
-                  </Row>
-                </Col>
-              </Row>
+              <TimeSelector
+                value={moment(timeValue, "HH:mm")}
+                defaultValue={moment(timeValue, "HH:mm")}
+                format={"HH:mm"}
+                handleChange={(time) => handleTimeChange(time)}
+              />
 
               {timeValue !== "00:00" ? (
-                <Row>
-                  <Col span={24}>
-                    <Paragraph className="date-link">Duration</Paragraph>
-                    <Row className="date-hide-show">
-                      <PlusCircleOutlined
-                        onClick={onIncreaseDuration}
-                        style={{ fontSize: "24px" }}
-                      />
-                      <TimePicker
-                        style={{ width: "60px" }}
-                        defaultValue={moment(durationValue, "HH:mm")}
-                        value={moment(
-                          `${durationHours}:${durationMinutes}`,
-                          "HH:mm"
-                        )}
-                        format={"HH:mm"}
-                        onChange={(time) => handleDurationChange(time)}
-                        suffixIcon={null}
-                        clearIcon={null}
-                        bordered={false}
-                      />
-                      <MinusCircleOutlined
-                        onClick={onDecreaseDuration}
-                        style={{ fontSize: "24px" }}
-                      />
-                    </Row>
-                  </Col>
-                </Row>
+                <DurationSelector
+                  handleIncrease={onIncreaseDuration}
+                  handleDecrease={onDecreaseDuration}
+                  handleChange={(time) => handleDurationChange(time)}
+                  value={moment(`${durationHours}:${durationMinutes}`, "HH:mm")}
+                  defaultValue={moment(durationValue, "HH:mm")}
+                />
               ) : (
                 ""
               )}
@@ -274,7 +134,6 @@ Calendar.propTypes = {
   pauseOnHover: PropTypes.bool,
   infinite: PropTypes.bool,
   arrows: PropTypes.bool,
-  onTimeChange: PropTypes.func,
 };
 const toDate = moment(Date()).format("YYYY-MM-DD");
 Calendar.defaultProps = {
@@ -294,7 +153,7 @@ Calendar.defaultProps = {
   speed: 300,
   pauseOnHover: true,
   infinite: false,
-  arrows: false,
+  arrows: true,
 };
 
 export default Calendar;
