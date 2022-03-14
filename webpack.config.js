@@ -6,7 +6,7 @@ module.exports = {
   output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: { modules: [path.resolve(__dirname, "src"), "node_modules"] },
-  devServer: {historyApiFallback: true },
+  devServer: { historyApiFallback: true },
   module: {
     rules: [
       {
@@ -15,8 +15,19 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.(css|scss)$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.(css|less)$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
