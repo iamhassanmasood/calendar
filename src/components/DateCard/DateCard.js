@@ -18,9 +18,7 @@ export default function DateCard({
           title={month}
           onClick={!disabled ? () => onChange(slectedDate) : () => {}}
         >
-          <Title className="date-title " level={1}>
-            {date}
-          </Title>
+          <Title className="date-title-head">{date}</Title>
           <Paragraph className="day-name">
             {disabled ? "Closed" : day}
           </Paragraph>

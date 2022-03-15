@@ -10,7 +10,7 @@ export default function DateSelector({ show, selectedDate, onShow }) {
       <Col span={24}>
         <Paragraph className="date-link">Date</Paragraph>
         <Row className="date-hide-show">
-          <Paragraph className="date-title">{selectedDate}</Paragraph>
+          <Paragraph className="date-title-top">{selectedDate}</Paragraph>
           {show ? (
             <DownOutlined className="icon-class" onClick={onShow} />
           ) : (
