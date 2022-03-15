@@ -1,19 +1,21 @@
 import React from "react";
-import DateCard from "./DateCard";
-import "antd/dist/antd.less";
+import DateCard from "../DateCard/DateCard";
 import { Carousel, Row, Col } from "antd";
-import { SampleNextArrow, SamplePrevArrow } from "./CarousalArrows";
+import {
+  CarouselNextArrow,
+  CarouselPreviousArrow,
+} from "../CarousalArrows/CarousalArrows";
 
 export default function CarouselCards(props) {
   const carouselSettings = {
-    autoplay: props.autoplay,
+    autoplay: props.autoPlay,
     infinite: props.infinite,
     pauseOnHover: props.pauseOnHover,
     slidesToShow: props.slidesToShow,
     slidesToScroll: props.slidesToScroll,
     speed: props.speed,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <CarouselNextArrow />,
+    prevArrow: <CarouselPreviousArrow />,
     responsive: [
       {
         breakpoint: 1360,
@@ -38,6 +40,7 @@ export default function CarouselCards(props) {
       },
     ],
   };
+
   return (
     <Row>
       <Col span={24} className="carousal-div">
@@ -52,7 +55,7 @@ export default function CarouselCards(props) {
             <DateCard
               month={item.month}
               date={item.day}
-              day={item.day_of_week}
+              day={item.dayOfWeek}
               slected={item.date}
               key={idx}
               onChange={props.call}

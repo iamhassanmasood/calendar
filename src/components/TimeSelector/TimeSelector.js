@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.less";
 import { Row, Col, Typography, TimePicker } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
@@ -17,7 +16,7 @@ export default function TimeSelector({
         <Paragraph className="date-link">Time</Paragraph>
         <Row className="date-hide-show">
           <TimePicker
-            style={{ width: "60px" }}
+            className="time-picker"
             defaultValue={defaultValue}
             value={value}
             format={format}
@@ -26,7 +25,7 @@ export default function TimeSelector({
             clearIcon={null}
             bordered={false}
           />
-          <DownOutlined style={{ fontSize: "20px" }} />
+          <DownOutlined className="out-lined-icon" />
         </Row>
       </Col>
     </Row>

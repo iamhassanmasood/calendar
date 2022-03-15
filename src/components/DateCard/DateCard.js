@@ -2,8 +2,6 @@ import React from "react";
 import { Card, Typography, Row, Col } from "antd";
 const { Title, Paragraph } = Typography;
 
-import "antd/dist/antd.less";
-
 export default function DateCard({
   month,
   date,
@@ -16,19 +14,14 @@ export default function DateCard({
     <Row>
       <Col span={24}>
         <Card
+          className={!disabled ? "card-enable" : "card-disable"}
           title={month}
-          style={{
-            width: 170,
-            height: 180,
-            textAlign: "center",
-            cursor: disabled ? "no-drop" : "pointer",
-          }}
           onClick={!disabled ? () => onChange(slected) : () => {}}
         >
-          <Title level={1} style={{ color: "gray", fontWeight: "normal" }}>
+          <Title className="date-title " level={1}>
             {date}
           </Title>
-          <Paragraph style={{ color: "gray", fontSize: "20px", bottom: "0" }}>
+          <Paragraph className="day-name">
             {disabled ? "Closed" : day}
           </Paragraph>
         </Card>

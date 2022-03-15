@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.less";
 import { Row, Col, Typography } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
@@ -11,13 +10,11 @@ export default function DateSelector({ show, selectedDate, onShow }) {
       <Col span={24}>
         <Paragraph className="date-link">Date</Paragraph>
         <Row className="date-hide-show">
-          <Paragraph style={{ paddingRight: "10px", fontSize: "16px" }}>
-            {selectedDate}
-          </Paragraph>
+          <Paragraph className="date-title">{selectedDate}</Paragraph>
           {show ? (
-            <DownOutlined onClick={onShow} style={{ fontSize: "20px" }} />
+            <DownOutlined className="icon-class" onClick={onShow} />
           ) : (
-            <UpOutlined onClick={onShow} style={{ fontSize: "20px" }} />
+            <UpOutlined className="icon-class" onClick={onShow} />
           )}
         </Row>
       </Col>

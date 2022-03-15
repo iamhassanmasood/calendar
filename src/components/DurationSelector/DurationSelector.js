@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.less";
 import { Row, Col, TimePicker, Typography } from "antd";
 import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 const { Paragraph } = Typography;
@@ -17,11 +16,11 @@ export default function DurationSelector({
         <Paragraph className="date-link">Duration</Paragraph>
         <Row className="date-hide-show">
           <PlusCircleOutlined
+            className="circle-icon"
             onClick={handleIncrease}
-            style={{ fontSize: "24px" }}
           />
           <TimePicker
-            style={{ width: "60px" }}
+            className="time-picker"
             defaultValue={defaultValue}
             value={value}
             format={"HH:mm"}
@@ -31,8 +30,8 @@ export default function DurationSelector({
             bordered={false}
           />
           <MinusCircleOutlined
+            className="circle-icon"
             onClick={handleDecrease}
-            style={{ fontSize: "24px" }}
           />
         </Row>
       </Col>

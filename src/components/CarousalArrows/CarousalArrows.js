@@ -1,12 +1,11 @@
 import React from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import "antd/dist/antd.less";
 
-export const SamplePrevArrow = (props) => {
+export const CarouselPreviousArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <LeftOutlined
-      className={className}
+      className={`${className}`}
       style={{
         ...style,
         display: "block",
@@ -17,8 +16,7 @@ export const SamplePrevArrow = (props) => {
     />
   );
 };
-
-export const SampleNextArrow = (props) => {
+export const CarouselNextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <RightOutlined

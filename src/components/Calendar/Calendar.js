@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import "antd/dist/antd.less";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
-import DateSelector from "./DateSelector";
-import TimeSelector from "./TimeSelector";
-import DurationSelector from "./DurationSelector";
-import CarouselCards from "./CarouselCards";
+import DateSelector from "../DateSelector/DateSelector";
+import TimeSelector from "../TimeSelector/TimeSelector";
+import DurationSelector from "../DurationSelector/DurationSelector";
+import CarouselCards from "../CarouselCards/CarouselCards";
 
 function Calendar(props) {
   const [records, setRecords] = useState([]);
@@ -18,32 +17,34 @@ function Calendar(props) {
   const [show, setShow] = useState(true);
 
   const generateDates = (props) => {
-    const date = moment(props.firstDate);
+    const firstDate = moment(props.firstDate);
     const disabledDates = props.disabledDates ? props.disabledDates : [];
 
     const first = props.firstDate
       ? moment(props.firstDate)
       : moment(new Date());
-    const last = props.lastDate ? moment(props.lastDate) : null;
+    const lastDate = props.lastDate ? moment(props.lastDate) : null;
 
-    const numberOfDays = last
-      ? moment.duration(last.diff(first)).asDays() + 1
+    const numberOfDays = lastDate
+      ? moment.duration(lastDate.diff(first)).asDays() + 1
       : props.numberOfDays;
 
     const dates = [];
     for (let i = 0; i < numberOfDays; i += 1) {
-      const isDisabled = !!disabledDates.includes(date.format("YYYY-MM-DD"));
+      const isDisabled = !!disabledDates.includes(
+        firstDate.format("YYYY-MM-DD")
+      );
 
       dates.push({
-        date: `${date.format("D")}. ${date.format("MMMM")} ${date.format(
-          "YYYY"
-        )}`,
-        day: date.format("D"),
-        day_of_week: date.format("dddd"),
-        month: date.format("MMMM"),
+        date: `${firstDate.format("D")}. ${firstDate.format(
+          "MMMM"
+        )} ${firstDate.format("YYYY")}`,
+        day: firstDate.format("D"),
+        dayOfWeek: firstDate.format("dddd"),
+        month: firstDate.format("MMMM"),
         disabled: isDisabled,
       });
-      date.add(1, "days");
+      firstDate.add(1, "days");
     }
     return setRecords(dates);
   };
@@ -150,7 +151,7 @@ Calendar.defaultProps = {
   autoPlay: true,
   slidesToShow: 4,
   slidesToScroll: 1,
-  speed: 300,
+  speed: 100,
   pauseOnHover: true,
   infinite: false,
   arrows: true,
