@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import moment from "moment";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
@@ -6,6 +6,7 @@ import DateSelector from "../DateSelector/DateSelector";
 import TimeSelector from "../TimeSelector/TimeSelector";
 import DurationSelector from "../DurationSelector/DurationSelector";
 import CarouselCards from "../CarouselCards/CarouselCards";
+import { currentDateFormate } from "../../helpers/formats";
 
 function Calendar(props) {
   const [records, setRecords] = useState([]);
@@ -17,50 +18,50 @@ function Calendar(props) {
   const [show, setShow] = useState(true);
 
   const generateDates = (props) => {
-    const firstDate = moment(props.firstDate);
+    const startDate = moment(props.firstDate);
     const disabledDates = props.disabledDates ? props.disabledDates : [];
 
-    const first = props.firstDate
+    const firstDate = props.firstDate
       ? moment(props.firstDate)
       : moment(new Date());
     const lastDate = props.lastDate ? moment(props.lastDate) : null;
 
     const numberOfDays = lastDate
-      ? moment.duration(lastDate.diff(first)).asDays() + 1
+      ? moment.duration(lastDate.diff(firstDate)).asDays() + 1
       : props.numberOfDays;
 
     const dates = [];
     for (let i = 0; i < numberOfDays; i += 1) {
       const isDisabled = !!disabledDates.includes(
-        firstDate.format("YYYY-MM-DD")
+        startDate.format("YYYY-MM-DD")
       );
-
       dates.push({
-        date: `${firstDate.format("D")}. ${firstDate.format(
-          "MMMM"
-        )} ${firstDate.format("YYYY")}`,
-        day: firstDate.format("D"),
-        dayOfWeek: firstDate.format("dddd"),
-        month: firstDate.format("MMMM"),
+        date: startDate.format("YYYY-MM-DD"),
+        day: startDate.format("D"),
+        dayOfWeek: startDate.format("dddd"),
+        month: startDate.format("MMMM"),
         disabled: isDisabled,
       });
-      firstDate.add(1, "days");
+      startDate.add(1, "days");
     }
     return setRecords(dates);
   };
 
-  useEffect(() => {
-    generateDates(props);
-  }, []);
+  useEffect(() => generateDates(props), []);
+
+  useLayoutEffect(() => {
+    let currentDate = currentDateFormate();
+    if (selectedDate == currentDate) setSelectedDate("Today");
+  }, [selectedDate]);
 
   function handleTimeChange(time) {
-    let _time = moment(time).format("HH:mm");
-    setTimeValue(_time);
+    let Time = moment(time).format("HH:mm");
+    setTimeValue(Time);
   }
   function handleDurationChange(time) {
-    let _time = moment(time).format("HH:mm");
-    setDurationValue(_time);
-    let arr = _time.split(":");
+    let Time = moment(time).format("HH:mm");
+    setDurationValue(Time);
+    let arr = Time.split(":");
     setDurationHours(Number(arr[0]));
     setDurationMinutes(Number(arr[1]));
   }
@@ -141,7 +142,7 @@ Calendar.defaultProps = {
   firstDate: toDate,
   lastDate: "",
   disabledDates: [
-    "2022-03-15",
+    "2022-03-17",
     "2022-03-18",
     "2022-03-21",
     "2022-03-24",

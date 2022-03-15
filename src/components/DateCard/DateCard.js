@@ -8,7 +8,7 @@ export default function DateCard({
   day,
   onChange,
   disabled,
-  slected,
+  slectedDate,
 }) {
   return (
     <Row>
@@ -16,7 +16,7 @@ export default function DateCard({
         <Card
           className={!disabled ? "card-enable" : "card-disable"}
           title={month}
-          onClick={!disabled ? () => onChange(slected) : () => {}}
+          onClick={!disabled ? () => onChange(slectedDate) : () => {}}
         >
           <Title className="date-title " level={1}>
             {date}

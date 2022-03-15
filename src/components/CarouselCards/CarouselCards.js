@@ -5,6 +5,7 @@ import {
   CarouselNextArrow,
   CarouselPreviousArrow,
 } from "../CarousalArrows/CarousalArrows";
+import { selectedDateFormat } from "../../helpers/formats";
 
 export default function CarouselCards(props) {
   const carouselSettings = {
@@ -56,7 +57,7 @@ export default function CarouselCards(props) {
               month={item.month}
               date={item.day}
               day={item.dayOfWeek}
-              slected={item.date}
+              slectedDate={selectedDateFormat(item.date)}
               key={idx}
               onChange={props.call}
               disabled={item.disabled}
