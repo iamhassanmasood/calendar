@@ -50,6 +50,7 @@ function Calendar(props) {
   useEffect(() => generateDates(props), []);
 
   useLayoutEffect(() => {
+    props.onDateChange(selectedDate);
     let currentDate = currentDateFormat();
     if (selectedDate == currentDate) setSelectedDate("Today");
   }, [selectedDate]);
@@ -95,7 +96,6 @@ function Calendar(props) {
               {...props}
               records={records}
               call={setSelectedDate}
-              onDateChange={props.onDateChange(selectedDate)}
             />
           ) : (
             <>
