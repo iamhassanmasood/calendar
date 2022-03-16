@@ -6,7 +6,7 @@ export const selectedDateFormat = (date) => {
   return format;
 };
 
-export const currentDateFormate = () => {
+export const currentDateFormat = () => {
   let date = new Date();
   let currentDate = `${moment(date).format("D")}. ${moment(date).format(
     "MMMM"

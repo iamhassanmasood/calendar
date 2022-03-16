@@ -6,7 +6,7 @@ import DateSelector from "../DateSelector/DateSelector";
 import TimeSelector from "../TimeSelector/TimeSelector";
 import DurationSelector from "../DurationSelector/DurationSelector";
 import CarouselCards from "../CarouselCards/CarouselCards";
-import { currentDateFormate } from "../../helpers/formats";
+import { currentDateFormat } from "../../helpers/formats";
 
 function Calendar(props) {
   const [records, setRecords] = useState([]);
@@ -50,7 +50,7 @@ function Calendar(props) {
   useEffect(() => generateDates(props), []);
 
   useLayoutEffect(() => {
-    let currentDate = currentDateFormate();
+    let currentDate = currentDateFormat();
     if (selectedDate == currentDate) setSelectedDate("Today");
   }, [selectedDate]);
 
@@ -95,6 +95,7 @@ function Calendar(props) {
               {...props}
               records={records}
               call={setSelectedDate}
+              onDateChange={props.onDateChange(selectedDate)}
             />
           ) : (
             <>
@@ -136,10 +137,11 @@ Calendar.propTypes = {
   pauseOnHover: PropTypes.bool,
   infinite: PropTypes.bool,
   arrows: PropTypes.bool,
+  onDateChange: PropTypes.func,
 };
-const toDate = moment(Date()).format("YYYY-MM-DD");
+
 Calendar.defaultProps = {
-  firstDate: toDate,
+  firstDate: moment(Date()).format("YYYY-MM-DD"),
   lastDate: "",
   disabledDates: [
     "2022-03-17",
@@ -156,6 +158,7 @@ Calendar.defaultProps = {
   pauseOnHover: true,
   infinite: false,
   arrows: true,
+  onDateChange: () => {},
 };
 
 export default Calendar;
