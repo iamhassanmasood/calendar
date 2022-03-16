@@ -128,21 +128,27 @@ function Calendar(props) {
 Calendar.propTypes = {
   firstDate: PropTypes.string.isRequired,
   lastDate: PropTypes.string,
-  disabledDates: PropTypes.array,
-  numberOfDays: PropTypes.number,
-  autoPlay: PropTypes.bool,
   slidesToShow: PropTypes.number,
   slidesToScroll: PropTypes.number,
   speed: PropTypes.number,
+  numberOfDays: PropTypes.number,
+  disabledDates: PropTypes.array,
+  autoPlay: PropTypes.bool,
   pauseOnHover: PropTypes.bool,
   infinite: PropTypes.bool,
   arrows: PropTypes.bool,
+  draggable: PropTypes.bool,
+  swipeToSlide: PropTypes.bool,
   onDateChange: PropTypes.func,
 };
 
 Calendar.defaultProps = {
   firstDate: moment(Date()).format("YYYY-MM-DD"),
   lastDate: "",
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  speed: 100,
+  numberOfDays: 30,
   disabledDates: [
     "2022-03-17",
     "2022-03-18",
@@ -150,14 +156,12 @@ Calendar.defaultProps = {
     "2022-03-24",
     "2022-03-27",
   ],
-  numberOfDays: 30,
   autoPlay: true,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  speed: 100,
   pauseOnHover: true,
-  infinite: false,
+  infinite: true,
   arrows: true,
+  draggable: true,
+  swipeToSlide: true,
   onDateChange: () => {},
 };
 

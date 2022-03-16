@@ -9,7 +9,7 @@ import { selectedDateFormat } from "../../helpers/formats";
 
 export default function CarouselCards(props) {
   const carouselSettings = {
-    autoplay: props.autoPlay,
+    autoplay: props.autoplay,
     infinite: props.infinite,
     pauseOnHover: props.pauseOnHover,
     slidesToShow: props.slidesToShow,
@@ -46,11 +46,11 @@ export default function CarouselCards(props) {
     <Row>
       <Col span={24} className="carousal-div">
         <Carousel
-          autoplay
+          autoplay={props.autoplay}
           {...carouselSettings}
-          swipeToSlide
-          draggable
-          arrows={true}
+          swipeToSlide={props.swipeToSlide}
+          draggable={props.draggable}
+          arrows={props.arrows}
         >
           {props.records.map((item, idx) => (
             <DateCard
