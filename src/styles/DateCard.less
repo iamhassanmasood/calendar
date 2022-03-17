@@ -1,3 +1,5 @@
+@mobile: ~"only screen and (min-width: 120px) and (max-width: 368px)";
+
 .card-enable {
   width: 170px;
   height: 180px;
@@ -10,6 +12,7 @@
   text-align: center;
   cursor: no-drop;
 }
+
 .date-title-head {
   font-weight: normal !important;
   color: gray !important;
@@ -19,13 +22,44 @@
   font-size: 20px;
   bottom: 0;
 }
+
 .ant-card {
   border-radius: 10px 10px 0 0;
 }
 .ant-card-head {
   background: #dd3c3c;
   border-radius: 9px 9px 0 0;
+  font-size: 18px;
 }
 .ant-card-head-title {
   color: #fff;
+}
+
+@media @mobile {
+  .card-enable {
+    width: 110px;
+    height: 140px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .card-disable {
+    width: 110px;
+    height: 140px;
+    text-align: center;
+    cursor: no-drop;
+  }
+  .day-name {
+    color: gray;
+    font-size: 10px;
+    bottom: 0;
+  }
+  .date-title-head {
+    font-weight: normal !important;
+    color: gray !important;
+    font-size: 20px !important;
+  }
+  .ant-card-head {
+    background: #dd3c3c;
+    border-radius: 9px 9px 0 0;
+  }
 }
