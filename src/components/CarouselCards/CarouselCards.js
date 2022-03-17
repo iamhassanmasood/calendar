@@ -5,7 +5,7 @@ import {
   CarouselNextArrow,
   CarouselPreviousArrow,
 } from "../CarousalArrows/CarousalArrows";
-import { selectedDateFormat } from "../../helpers/formats";
+import { dateFormater } from "../../helpers/formats";
 
 export default function CarouselCards(props) {
   const carouselSettings = {
@@ -43,28 +43,26 @@ export default function CarouselCards(props) {
   };
 
   return (
-    <Row>
-      <Col span={24} className="carousal-div">
-        <Carousel
-          autoplay={props.autoplay}
-          {...carouselSettings}
-          swipeToSlide={props.swipeToSlide}
-          draggable={props.draggable}
-          arrows={props.arrows}
-        >
-          {props.records.map((item, idx) => (
-            <DateCard
-              month={item.month}
-              date={item.day}
-              day={item.dayOfWeek}
-              slectedDate={selectedDateFormat(item.date)}
-              key={idx}
-              onChange={props.call}
-              disabled={item.disabled}
-            />
-          ))}
-        </Carousel>
-      </Col>
-    </Row>
+    <Col span={24} className="carousal-div">
+      <Carousel
+        autoplay={props.autoplay}
+        {...carouselSettings}
+        swipeToSlide={props.swipeToSlide}
+        draggable={props.draggable}
+        arrows={props.arrows}
+      >
+        {props.records.map((item, idx) => (
+          <DateCard
+            month={item.month}
+            date={item.day}
+            day={item.dayOfWeek}
+            slectedDate={dateFormater(item.date)}
+            key={idx}
+            onChange={props.call}
+            disabled={item.disabled}
+          />
+        ))}
+      </Carousel>
+    </Col>
   );
 }
