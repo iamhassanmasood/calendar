@@ -1,6 +1,6 @@
 ## Usage Props
 
-| Props          |   Type   | isRequired | Example                                                                                                  |
+| API            | PropType | isRequired | Example                                                                                                  |
 | :------------- | :------: | :--------: | :------------------------------------------------------------------------------------------------------- |
 | firstDate      |  string  |    Yes     | `'Default is 2022-03-07'`                                                                                |
 | lastDate       |  string  |     No     | `'Should be a date in "YYYY-MM-DD" format'`                                                              |

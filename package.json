@@ -1,15 +1,25 @@
 {
-  "name": "webpack-configured-react-app",
+  "name": "carousel-calendar-react-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a carousel calendar",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamhassanmasood/calendar.git"
+  },
+  "keywords": [
+    "calendar",
+    "carousel",
+    "date",
+    "duration",
+    "time"
+  ],
+  "author": "Hassan Masood",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.5",
