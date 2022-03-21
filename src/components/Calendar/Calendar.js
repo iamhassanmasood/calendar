@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import moment from "moment";
-import { Row, Col } from "antd";
+import { Col } from "antd";
 import PropTypes from "prop-types";
 import DateSelector from "../DateSelector/DateSelector";
 import TimeSelector from "../TimeSelector/TimeSelector";
@@ -133,16 +133,16 @@ Calendar.propTypes = {
 };
 
 Calendar.defaultProps = {
-  firstDate: moment(Date()).format("YYYY-MM-DD"),
-  lastDate: "",
+  firstDate: "2022-03-03",
+  lastDate: "2022-04-03",
   slidesToShow: 4,
   slidesToScroll: 1,
-  speed: 100,
+  speed: 300,
   numberOfDays: 30,
   disabledDates: [
     "2022-03-19",
     "2022-03-18",
-    "2022-03-21",
+    "2022-03-22",
     "2022-03-24",
     "2022-03-27",
   ],

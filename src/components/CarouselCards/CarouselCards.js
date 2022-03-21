@@ -1,10 +1,8 @@
 import React from "react";
 import DateCard from "../DateCard/DateCard";
-import { Carousel, Row, Col } from "antd";
-import {
-  CarouselNextArrow,
-  CarouselPreviousArrow,
-} from "../CarousalArrows/CarousalArrows";
+import { Carousel, Col } from "antd";
+import CarouselNextArrow from "../CarouselArrows/CarouselNextArrow";
+import CarouselPreviousArrow from "../CarouselArrows/CarouselPreviousArrow";
 import { dateFormater } from "../../helpers/formats";
 
 export default function CarouselCards(props) {
@@ -51,17 +49,19 @@ export default function CarouselCards(props) {
         draggable={props.draggable}
         arrows={props.arrows}
       >
-        {props.records.map((item, idx) => (
-          <DateCard
-            month={item.month}
-            date={item.day}
-            day={item.dayOfWeek}
-            slectedDate={dateFormater(item.date)}
-            key={idx}
-            onChange={props.call}
-            disabled={item.disabled}
-          />
-        ))}
+        {props.records
+          ? props.records.map((item, idx) => (
+              <DateCard
+                month={item.month}
+                date={item.day}
+                day={item.dayOfWeek}
+                slectedDate={dateFormater(item.date)}
+                key={idx}
+                onChange={props.call}
+                disabled={item.disabled}
+              />
+            ))
+          : ""}
       </Carousel>
     </Col>
   );
