@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`check CrouselArrpw rendering on dom check dom tree rendering 1`] = `ShallowWrapper {}`;
+exports[`check CrouselArrpw rendering on dom check dom tree for snapshots and props 1`] = `ShallowWrapper {}`;

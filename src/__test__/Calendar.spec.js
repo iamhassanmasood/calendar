@@ -18,4 +18,24 @@ describe("Calendar component", () => {
     const wrapper = shallow(<Calendar />);
     expect(wrapper.find(CarouselCards).prop("records"));
   });
+  it("Check props of components", () => {
+    const props = {
+      firstDate: "2022-03-03",
+      lastDate: "",
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      numberOfDays: 30,
+      speed: 300,
+      disabledDates: [],
+      autoplay: false,
+      pauseOnHover: true,
+      infinite: true,
+      arrows: true,
+      draggable: true,
+      swipeToSlide: true,
+      onDateChange: jest.fn(),
+    };
+    const wrapper = shallow(<Calendar {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

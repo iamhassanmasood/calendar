@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Calendar component Check props of components 1`] = `ShallowWrapper {}`;
+
 exports[`Calendar component calendar without crashing 1`] = `ShallowWrapper {}`;

@@ -7,8 +7,13 @@ describe("check CrouselArrpw rendering on dom", () => {
     const wrapper = shallow(<CarouselPreviousArrow />);
     wrapper.unmount();
   });
-  it("check dom tree rendering", () => {
-    let tree = shallow(<CarouselPreviousArrow />);
-    expect(tree).toMatchSnapshot();
+  it("check dom tree for snapshots and props", () => {
+    let props = {
+      className: "",
+      style: jest.Obj,
+      onClick: jest.fn(),
+    };
+    let wrapper = shallow(<CarouselPreviousArrow {...props} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
