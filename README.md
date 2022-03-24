@@ -14,7 +14,7 @@
 | arrows         | boolean  |     No     | `'true or false, true is default'`                                                                       |
 | draggable      | boolean  |     No     | `'true or false, true is default'`                                                                       |
 | swipeToSlide   | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| onDateChange   | function |     No     | `'function hello(date){ return date }`                                                                   |
+| onDateChange   | function |     No     | `'function getDate(date){ return date }`                                                                 |
 
 ## License
 
