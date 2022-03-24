@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import App from "./../App";
-import Calendar from "./../components/Calendar/Calendar";
+import App from "./../src/App.js";
+import Calendar from "./../src/components/Calendar/Calendar";
 
 describe("Calendar component", () => {
   it("mounts without crashing", () => {

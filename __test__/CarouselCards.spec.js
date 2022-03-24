@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import CarouselCards from "./../components/CarouselCards/CarouselCards";
+import CarouselCards from "./../src/components/CarouselCards/CarouselCards";
 
 describe("Carousel Cards Rendering", () => {
   it("mounts without crashing", () => {

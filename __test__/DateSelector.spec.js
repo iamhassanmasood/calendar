@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import DateSelector from "./../components/DateSelector/DateSelector";
+import DateSelector from "./../src/components/DateSelector/DateSelector";
 
 describe("date selector rendering", () => {
   it("mounts without crashing", () => {

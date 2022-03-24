@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import CarouselPreviousArrow from "./../components/CarouselArrows/CarouselPreviousArrow";
+import CarouselNextArrow from "./../src/components/CarouselArrows/CarouselNextArrow";
 
 describe("check CrouselArrpw rendering on dom", () => {
   it("mounts without crashing", () => {
-    const wrapper = shallow(<CarouselPreviousArrow />);
+    const wrapper = shallow(<CarouselNextArrow />);
     wrapper.unmount();
   });
   it("check dom tree for snapshots and props", () => {
@@ -13,7 +13,7 @@ describe("check CrouselArrpw rendering on dom", () => {
       style: jest.Obj,
       onClick: jest.fn(),
     };
-    let wrapper = shallow(<CarouselPreviousArrow {...props} />);
+    let wrapper = shallow(<CarouselNextArrow {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

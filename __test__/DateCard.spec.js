@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import DateCard from "./../components/DateCard/DateCard";
+import DateCard from "./../src/components/DateCard/DateCard";
 
 describe("date card component", () => {
   it("mounts without crashing", () => {

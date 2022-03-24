@@ -21,7 +21,7 @@ describe("Application render test via cypress", () => {
     cy.visit("/");
     cy.get(".ant-row > .anticon > svg").click();
   });
-  it.only("check inputs", () => {
+  it("check inputs", () => {
     cy.visit("/");
     cy.get('[data-icon="down"]').click();
     cy.get('[placeholder="Select time"]').click();
