@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme/build";
-import Calendar from "./../components/Calendar/Calendar";
-import DateSelector from "./../components/DateSelector/DateSelector";
-import CarouselCards from "./../components/CarouselCards/CarouselCards";
+import Calendar from "./../src/components/Calendar/Calendar";
+import DateSelector from "./../src/components/DateSelector/DateSelector";
+import CarouselCards from "./../src/components/CarouselCards/CarouselCards";
 
 describe("Calendar component", () => {
   it("calendar without crashing", () => {
