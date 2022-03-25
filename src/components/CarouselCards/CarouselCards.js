@@ -1,20 +1,17 @@
 import React from "react";
 import DateCard from "../DateCard/DateCard";
 import { Carousel, Col } from "antd";
-import CarouselNextArrow from "../CarouselArrows/CarouselNextArrow";
-import CarouselPreviousArrow from "../CarouselArrows/CarouselPreviousArrow";
 import { dateFormater } from "../../helpers/formats";
 
 export default function CarouselCards(props) {
   const carouselSettings = {
-    autoplay: props.autoplay,
-    infinite: props.infinite,
-    pauseOnHover: props.pauseOnHover,
-    slidesToShow: props.slidesToShow,
-    slidesToScroll: props.slidesToScroll,
+    autoplay: false,
+    infinite: false,
+    slidesToShow: props.datesToShow,
+    slidesToScroll: props.steps,
     speed: props.speed,
-    nextArrow: <CarouselNextArrow />,
-    prevArrow: <CarouselPreviousArrow />,
+    nextArrow: props.nextArrow,
+    prevArrow: props.previousArrow,
     responsive: [
       {
         breakpoint: 1360,
@@ -44,10 +41,11 @@ export default function CarouselCards(props) {
     <Col span={24} className="carousal-div">
       <Carousel
         autoplay={props.autoplay}
-        {...carouselSettings}
         swipeToSlide={props.swipeToSlide}
-        draggable={props.draggable}
         arrows={props.arrows}
+        draggable={false}
+        dots={false}
+        {...carouselSettings}
       >
         {props.records
           ? props.records.map((item, idx) => (

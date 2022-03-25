@@ -7,6 +7,8 @@ import TimeSelector from "../TimeSelector/TimeSelector";
 import DurationSelector from "../DurationSelector/DurationSelector";
 import CarouselCards from "../CarouselCards/CarouselCards";
 import { dateFormater } from "../../helpers/formats";
+import CarouselNextArrow from "../CarouselArrows/CarouselNextArrow";
+import CarouselPreviousArrow from "../CarouselArrows/CarouselPreviousArrow";
 
 function Calendar(props) {
   const [records, setRecords] = useState([]);
@@ -17,33 +19,31 @@ function Calendar(props) {
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [showCalendar, setShowCalendar] = useState(true);
 
-  const generateDates = () => {
-    const startDate = moment(props.firstDate);
-    const disabledDates = props.disabledDates ? props.disabledDates : [];
+  useEffect(() => {
+    const startingDate = moment(props.startDate);
+    const closeDates = props.closeDates ? props.closeDates : [];
     const lastDate = props.lastDate ? moment(props.lastDate) : null;
-
     const numberOfDays = lastDate
-      ? moment.duration(lastDate.diff(startDate)).asDays() + 1
+      ? moment.duration(lastDate.diff(startingDate)).asDays() + 1
       : props.numberOfDays;
-
-    const dateRange = [];
-    for (let i = 0; i < numberOfDays; i += 1) {
-      const isDisabled = !!disabledDates.includes(
-        startDate.format("YYYY-MM-DD")
-      );
-      dateRange.push({
-        date: startDate.format("YYYY-MM-DD"),
-        day: startDate.format("D"),
-        dayOfWeek: startDate.format("dddd"),
-        month: startDate.format("MMMM"),
-        disabled: isDisabled,
+    let dateRange = [];
+    Array(numberOfDays)
+      .fill()
+      .map(() => {
+        const isDisabled = !!closeDates.includes(
+          startingDate.format(props.dateFormat)
+        );
+        dateRange.push({
+          date: startingDate.format(props.dateFormat),
+          day: startingDate.format("D"),
+          dayOfWeek: startingDate.format("dddd"),
+          month: startingDate.format("MMMM"),
+          disabled: isDisabled,
+        });
+        startingDate.add(1, "days");
       });
-      startDate.add(1, "days");
-    }
     return setRecords(dateRange);
-  };
-
-  useEffect(() => generateDates(), []);
+  }, []);
 
   useLayoutEffect(() => {
     props.onDateChange(selectedDate);
@@ -116,42 +116,40 @@ function Calendar(props) {
 }
 
 Calendar.propTypes = {
-  firstDate: PropTypes.string.isRequired,
+  startDate: PropTypes.string.isRequired,
   lastDate: PropTypes.string,
-  slidesToShow: PropTypes.number,
-  slidesToScroll: PropTypes.number,
+  dateFormat: PropTypes.string,
+  datesToShow: PropTypes.number,
+  steps: PropTypes.number,
   speed: PropTypes.number,
   numberOfDays: PropTypes.number,
-  disabledDates: PropTypes.array,
-  autoplay: PropTypes.bool,
-  pauseOnHover: PropTypes.bool,
-  infinite: PropTypes.bool,
+  closeDates: PropTypes.array,
   arrows: PropTypes.bool,
-  draggable: PropTypes.bool,
+  nextArrow: PropTypes.elementType,
+  previousArrow: PropTypes.elementType,
   swipeToSlide: PropTypes.bool,
   onDateChange: PropTypes.func,
 };
 
 Calendar.defaultProps = {
-  firstDate: "2022-03-03",
+  startDate: "2022-03-03",
   lastDate: "2022-04-03",
-  slidesToShow: 4,
-  slidesToScroll: 1,
+  dateFormat: "YYYY-MM-DD",
+  datesToShow: 4,
+  steps: 1,
   speed: 300,
   numberOfDays: 30,
-  disabledDates: [
+  closeDates: [
     "2022-03-19",
     "2022-03-18",
     "2022-03-22",
     "2022-03-24",
     "2022-03-27",
   ],
-  autoplay: true,
-  pauseOnHover: true,
-  infinite: true,
   arrows: true,
-  draggable: true,
   swipeToSlide: true,
+  nextArrow: <CarouselNextArrow />,
+  previousArrow: <CarouselPreviousArrow />,
   onDateChange: () => {},
 };
 
