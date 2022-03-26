@@ -1,20 +1,18 @@
 ## Usage Props
 
-| API            | PropType | isRequired | Example                                                                                                  |
-| :------------- | :------: | :--------: | :------------------------------------------------------------------------------------------------------- |
-| firstDate      |  string  |    Yes     | `'Default is 2022-03-07'`                                                                                |
-| lastDate       |  string  |     No     | `'Should be a date in "YYYY-MM-DD" format'`                                                              |
-| slidesToShow   |  number  |     No     | `'Should be a Number, 4 is default'`                                                                     |
-| slidesToScroll |  number  |     No     | `'Should be a Number, 1 is default'`                                                                     |
-| speed          |  number  |     No     | `'Should be a Number, like 100, 200, 300, or 1000.. 100 is set to be default'`                           |
-| disabledDates  |  array   |     No     | `'Should be an Array, ["2022-03-17","2022-03-18", "2022-03-21", "2022-03-24", "2022-03-27"] is default'` |
-| autoplay       | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| pauseOnHover   | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| infinite       | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| arrows         | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| draggable      | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| swipeToSlide   | boolean  |     No     | `'true or false, true is default'`                                                                       |
-| onDateChange   | function |     No     | `'function getDate(date){ return date }`                                                                 |
+| API           | PropType | isRequired | Defaults                                 | Use |
+| :------------ | :------: | :--------: | :--------------------------------------- | --- |
+| firstDate     |  string  |    Yes     | `'moment(Date()).format("YYYY-MM-DD")'`  |
+| lastDate      |  string  |     No     | `''`                                     |
+| datesToShow   |  number  |     No     | `'4'`                                    |
+| steps         |  number  |     No     | `'1'`                                    |
+| speed         |  number  |     No     | `'100'`                                  |
+| disabledDates |  array   |     No     | `'[]'`                                   |
+| arrows        | boolean  |     No     | `'true'`                                 |
+| swipeToSlide  | boolean  |     No     | `'true'`                                 |
+| onDateChange  | function |     No     | `'function getDate(date){ return date }` |
+| nextArrow     | element  |     No     | `<NextArrow/>`                           |
+| previousArrow | element  |     No     | `<PreviousArrow/>`                       |
 
 ## License
 
