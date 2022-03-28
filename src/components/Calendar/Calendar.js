@@ -18,16 +18,12 @@ function Calendar(props) {
   const [durationHours, setDurationHours] = useState(0);
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [showCalendar, setShowCalendar] = useState(true);
+  const startingDate = moment(props.startDate);
+  const closeDates = props.closeDates ? props.closeDates : [];
 
-  useEffect(() => {
-    const startingDate = moment(props.startDate);
-    const closeDates = props.closeDates ? props.closeDates : [];
-    const lastDate = props.lastDate ? moment(props.lastDate) : null;
-    const numberOfDays = lastDate
-      ? moment.duration(lastDate.diff(startingDate)).asDays() + 1
-      : props.numberOfDays;
+  const daysGenerationForSelectedRange = (number) => {
     let dateRange = [];
-    Array(numberOfDays)
+    Array(number)
       .fill()
       .map(() => {
         const isDisabled = !!closeDates.includes(
@@ -42,7 +38,16 @@ function Calendar(props) {
         });
         startingDate.add(1, "days");
       });
-    return setRecords(dateRange);
+    return dateRange;
+  };
+
+  useEffect(() => {
+    const lastDate = props.lastDate ? moment(props.lastDate) : null;
+    const numberOfDays = lastDate
+      ? moment.duration(lastDate.diff(startingDate)).asDays() + 1
+      : props.numberOfDays;
+    let _check = daysGenerationForSelectedRange(numberOfDays);
+    return setRecords(_check);
   }, []);
 
   useLayoutEffect(() => {
@@ -144,7 +149,7 @@ const CardBodyStyleClose = {
 Calendar.propTypes = {
   startDate: PropTypes.string.isRequired,
   lastDate: PropTypes.string,
-  dateFormat: PropTypes.string,
+  dateFormat: PropTypes.oneOf(["MM-DD-YYYY", "YYYY-MM-DD"]),
   datesToShow: PropTypes.number,
   steps: PropTypes.number,
   speed: PropTypes.number,
