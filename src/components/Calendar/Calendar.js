@@ -115,22 +115,32 @@ function Calendar(props) {
   );
 }
 
-const CardHeaderStyle = (disabled) => {
-  return {
-    backgroundColor: !disabled ? "#f00202" : "#8e8f90",
-    borderRadius: "9px 9px 0 0",
-    color: "#fff",
-    fontSize: "18px",
-  };
+const CardHeaderStyle = {
+  backgroundColor: "#f00202",
+  borderRadius: "9px 9px 0 0",
+  color: "#fff",
+  fontSize: "18px",
 };
 
-const CardBodyStyle = (disabled) => {
-  return {
-    fontWeight: "normal",
-    color: "black",
-    backgroundColor: !disabled ? "#fff" : "#f0f0f0",
-  };
+const CardBodyStyle = {
+  fontWeight: "normal",
+  color: "black",
+  backgroundColor: "#fff",
 };
+
+const CardHeaderStyleClose = {
+  backgroundColor: "#8e8f90",
+  borderRadius: "9px 9px 0 0",
+  color: "#fff",
+  fontSize: "18px",
+};
+
+const CardBodyStyleClose = {
+  fontWeight: "normal",
+  color: "black",
+  backgroundColor: "#f0f0f0",
+};
+
 Calendar.propTypes = {
   startDate: PropTypes.string.isRequired,
   lastDate: PropTypes.string,
@@ -145,8 +155,10 @@ Calendar.propTypes = {
   previousArrow: PropTypes.element,
   swipeToSlide: PropTypes.bool,
   onDateChange: PropTypes.func,
-  cardHeaderStyle: PropTypes.func,
-  cardBodyStyle: PropTypes.func,
+  cardHeaderStyle: PropTypes.object,
+  cardBodyStyle: PropTypes.object,
+  cardHeaderStyleClose: PropTypes.object,
+  cardBodyStyleClose: PropTypes.object,
 };
 
 Calendar.defaultProps = {
@@ -171,6 +183,8 @@ Calendar.defaultProps = {
   onDateChange: () => {},
   cardHeaderStyle: CardHeaderStyle,
   cardBodyStyle: CardBodyStyle,
+  cardHeaderStyleClose: CardHeaderStyleClose,
+  cardBodyStyleClose: CardBodyStyleClose,
 };
 
 export default Calendar;

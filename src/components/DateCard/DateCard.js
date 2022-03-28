@@ -12,6 +12,8 @@ export default function DateCard(props) {
     slectedDate,
     headStyles,
     bodyStyles,
+    headStylesClose,
+    bodyStylesClose,
   } = props;
   return (
     <Col span={24}>
@@ -32,8 +34,8 @@ export default function DateCard(props) {
         <Card
           className={!disabled ? "card-enable" : "card-disable"}
           title={month}
-          bodyStyle={bodyStyles}
-          headStyle={headStyles}
+          headStyle={headStylesClose}
+          bodyStyle={bodyStylesClose}
         >
           <Title className="date-title-head">{date}</Title>
           <Paragraph className="day-name">
