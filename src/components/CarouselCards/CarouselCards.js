@@ -50,6 +50,8 @@ export default function CarouselCards(props) {
         {props.records
           ? props.records.map((item, idx) => (
               <DateCard
+                headStyles={props.cardHeaderStyle(item.disabled)}
+                bodyStyles={props.cardBodyStyle(item.disabled)}
                 month={item.month}
                 date={item.day}
                 day={item.dayOfWeek}

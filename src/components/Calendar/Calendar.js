@@ -115,6 +115,22 @@ function Calendar(props) {
   );
 }
 
+const CardHeaderStyle = (disabled) => {
+  return {
+    backgroundColor: !disabled ? "#f00202" : "#8e8f90",
+    borderRadius: "9px 9px 0 0",
+    color: "#fff",
+    fontSize: "18px",
+  };
+};
+
+const CardBodyStyle = (disabled) => {
+  return {
+    fontWeight: "normal",
+    color: "black",
+    backgroundColor: !disabled ? "#fff" : "#f0f0f0",
+  };
+};
 Calendar.propTypes = {
   startDate: PropTypes.string.isRequired,
   lastDate: PropTypes.string,
@@ -129,6 +145,8 @@ Calendar.propTypes = {
   previousArrow: PropTypes.element,
   swipeToSlide: PropTypes.bool,
   onDateChange: PropTypes.func,
+  cardHeaderStyle: PropTypes.func,
+  cardBodyStyle: PropTypes.func,
 };
 
 Calendar.defaultProps = {
@@ -151,6 +169,8 @@ Calendar.defaultProps = {
   nextArrow: <CarouselNextArrow />,
   previousArrow: <CarouselPreviousArrow />,
   onDateChange: () => {},
+  cardHeaderStyle: CardHeaderStyle,
+  cardBodyStyle: CardBodyStyle,
 };
 
 export default Calendar;
