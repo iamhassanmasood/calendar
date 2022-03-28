@@ -3,7 +3,6 @@ import { Card, Typography, Col } from "antd";
 const { Title, Paragraph } = Typography;
 
 export default function DateCard(props) {
-  console.log(props, "....props");
   const {
     month,
     date,
